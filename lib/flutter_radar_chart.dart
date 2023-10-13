@@ -1,10 +1,9 @@
 library flutter_radar_chart;
 
-import 'dart:ui';
 import 'dart:math' as math;
+import 'dart:math' show pi, cos, sin;
 
 import 'package:flutter/material.dart';
-import 'dart:math' show pi, cos, sin;
 
 const defaultGraphColors = [
   Colors.green,
@@ -66,7 +65,7 @@ class RadarChart extends StatefulWidget {
         features: features,
         data: data,
         featuresTextStyle: const TextStyle(color: Colors.white, fontSize: 16),
-        outlineColor: Colors.white,
+        outlineColor: Colors.red,
         axisColor: Colors.grey,
         reverseAxis: reverseAxis,
         sides: useSides ? features.length : 0);
@@ -201,7 +200,7 @@ class RadarChartPainter extends CustomPainter {
     // Painting the chart outline
     var outlinePaint = Paint()
       ..color = outlineColor
-      ..style = PaintingStyle.stroke
+      ..style = PaintingStyle.fill
       ..strokeWidth = 2.0
       ..isAntiAlias = true;
 
@@ -254,7 +253,7 @@ class RadarChartPainter extends CustomPainter {
       var featureOffset =
           Offset(centerX + radius * xAngle, centerY + radius * yAngle);
 
-      canvas.drawLine(centerOffset, featureOffset, ticksPaint);
+      // canvas.drawLine(centerOffset, featureOffset, ticksPaint);
 
       var featureLabelFontHeight = featuresTextStyle.fontSize;
       var labelYOffset = yAngle < 0 ? -featureLabelFontHeight! : 0;
@@ -272,13 +271,13 @@ class RadarChartPainter extends CustomPainter {
     // Painting each graph
     data.asMap().forEach((index, graph) {
       var graphPaint = Paint()
-        ..color = graphColors[index % graphColors.length].withOpacity(0.3)
+        ..color = Color(0xff687CF4)
         ..style = PaintingStyle.fill;
 
       var graphOutlinePaint = Paint()
-        ..color = graphColors[index % graphColors.length]
+        ..color = Color(0xff687CF4)
         ..style = PaintingStyle.stroke
-        ..strokeWidth = 2.0
+        ..strokeWidth = 1.0
         ..isAntiAlias = true;
 
       // Start the graph on the initial point
